@@ -2,6 +2,7 @@ import random
 
 class Hond:
     brokjes = ["Snoep", "Koekje", "Cake", "Pizza"]
+    vloeistof = ["kraanwater", "bier", "regenwater"]
 
     def __init__(self):
         self.Dog = "Hondje"
@@ -17,3 +18,6 @@ class Hond:
 
     def gaRennen(self):
         return self.Dog + " is aan het rennen."
+
+    def drinken(self):
+        return self.Dog + " drinkt " + random.choice(self.vloeistof)
