@@ -16,5 +16,8 @@ class Hond:
     def gaRekenen(self, eerstGetal, tweedeGetal):
         return "Woef woef " + str(eerstGetal * tweedeGetal)
 
+    def gaRennen(self):
+        return self.Dog + " is aan het rennen."
+
     def drinken(self):
         return self.Dog + " drinkt " + random.choice(self.vloeistof)
