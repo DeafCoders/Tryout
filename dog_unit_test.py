@@ -1,5 +1,5 @@
 from dog import Dog
-from unittest import *
+from unittest import TestCase, main
 
 
 class DogUnitTest(TestCase):
@@ -29,7 +29,7 @@ class DogUnitTest(TestCase):
         # print(text)
 
     def test_drink(self):
-        text = self.dog.drink()
+        text = self.dog.get_drink()
         self.assertTrue(text.startswith(self.name + " drinkt "))
         # print(text)
 
