@@ -56,12 +56,3 @@ class Copernica:
 
 
 
-
-
-#Ophalen alle mailings ahv token van een klant
-#print(Copernica().get_mailings("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313"))
-#ophalen statistieken ahv token van een klant
-#print(Copernica().get_mailing_details("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313", "19", "snapshot"))
-
-#ophalen van tien mailings inclsief alle benodigde informatie (deliveries, maildocument info, abuses en statistiekeninfo)
-print(Copernica().get_mailings_mass("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313", 2))
