@@ -26,4 +26,7 @@ c.setopt(pycurl.VERBOSE, 1)
 c.setopt(pycurl.WRITEDATA, b)
 
 c.perform()
-print(b.getvalue())
+output_values = json.loads(b.getvalue().decode())
+print(type(output_values))
+print(output_values["error"])
+
