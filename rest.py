@@ -3,32 +3,32 @@ from io import BytesIO
 import sys
 import certifi
 import json
+import urllib.parse as urllib
 
+params = {}
+params['type'] = 123
+params['limit'] = 123
+params['start'] = 0
+params['access_token'] = 123
 
-params = json.dumps([
-  'type : 123',
-  'limit : 123',
-    'start : 0',
-    'access_token : 123'
-])
+params = json.dumps(urllib.urlencode(params))
+print(params)
 http_header = [
-    'Content-Type: application/json',
-    'Content-Length: ' + str(sys.getsizeof(params))
+    'Content-Type: application/json'
 ]
 
-url = 'https://api.copernica.com/emailings/'
+url = 'https://api.copernica.com/emailings/?%s' % params
 
 b = BytesIO()
 c = pycurl.Curl()
 
 c.setopt(pycurl.CAINFO, certifi.where())
 c.setopt(pycurl.URL, url)
+c.setopt(pycurl.VERBOSE, 1)
 c.setopt(pycurl.WRITEDATA, b)
-c.setopt(pycurl.HEADER, 1)
-c.setopt(pycurl.CUSTOMREQUEST, "POST")
-c.setopt(pycurl.POST, 1)
-c.setopt(pycurl.POSTFIELDS, params)
-c.setopt(pycurl.HTTPHEADER, http_header)
 
 c.perform()
-print(b.getvalue())
+output_values = json.loads(b.getvalue().decode())
+print(type(output_values))
+print(output_values["error"])
+
