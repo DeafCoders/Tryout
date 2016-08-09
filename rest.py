@@ -1,18 +1,22 @@
-import urllib
-try:
-    import urllib2
-except ImportError:
-    import urllib.request as urllib2
+import pycurl
+from io import BytesIO
+import sys
+import json
 
-# url = 'http://www.acme.com/products/3222'
-# response = urllib2.urlopen(url).read()
 
-url = 'http://ip.jsontest.com'
-params = urllib.parse.urlencode({
-  'firstName': 'John',
-  'lastName': 'Doe'
-})
-binary_params = params.encode()
+params = {
+  'type': '123',
+  'limit': '123',
+    'start': '0',
+    'access_token': '123'
+}
 
-response = urllib2.urlopen(url, binary_params).read()
-print(response)
+url = 'https://api.copernica.com/emailings/'
+
+b = BytesIO()
+c = pycurl.Curl()
+
+c.setopt(pycurl.URL, url)
+c.setopt(pycurl.WRITEDATA, b)
+c.perform()je
+print(b.getvalue())
