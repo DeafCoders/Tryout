@@ -1,5 +1,6 @@
 import pycurl
 from io import BytesIO
+import certifi
 import sys
 import json
 
@@ -16,7 +17,8 @@ url = 'https://api.copernica.com/emailings/'
 b = BytesIO()
 c = pycurl.Curl()
 
+c.setopt(pycurl.CAINFO, certifi.where())
 c.setopt(pycurl.URL, url)
 c.setopt(pycurl.WRITEDATA, b)
-c.perform()je
+c.perform()
 print(b.getvalue())
