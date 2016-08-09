@@ -2,17 +2,20 @@ from random import choice
 
 
 class Dog:
-    crunchies = ["snoep", "koekje", "cake", "pizza", "niet"]
-    fluids = ["kraanwater", "bier", "regenwater", "niet"]
+    __crunchies = ["snoep", "koekje", "cake", "pizza", "niet"]
+    __fluids = ["kraanwater", "bier", "regenwater", "niet"]
 
     def __init__(self, name):
-        self.Dog = name
+        self.__Dog = name
 
     def bark(self):
-        return self.Dog + " blaft: \"Woef\" "
+        return self.__Dog + " blaft: \"Woef\" "
 
     def get_food(self):
-        return self.Dog + " eet een " + choice(self.crunchies) + "."
+        crunchy = choice(self.__crunchies)
+        if crunchy == "niet":
+            return self.__Dog + " eet " + crunchy + "."
+        return self.__Dog + " eet een " + crunchy + "."
 
     def do_math(self, first_number, second_number):
         barks = self.bark()[:-2]
@@ -23,13 +26,21 @@ class Dog:
             barks += "!\" (" + str(answer) + "x geblaft)"
             return barks
         elif answer == 0:
-            return self.Dog + " zwijgt... (" + str(answer) + "x geblaft)"
+            return self.__Dog + " zwijgt... (" + str(answer) + "x geblaft)"
         else:
-            return self.Dog + " gromt boos: Grrrr! (Je hond wil niet " + str(answer) + "x blaffen, graag tussen 0x en 25x)"
-
+            return self.__Dog + " gromt boos: Grrrr! (Je hond wil niet " + str(
+                answer) + "x blaffen, graag tussen 0x en 25x)"
 
     def go_racing(self):
-        return self.Dog + " is aan het rennen."
+        return self.__Dog + " is aan het rennen."
 
     def get_drink(self):
-        return self.Dog + " drinkt " + choice(self.fluids) + "."
+        return self.__Dog + " drinkt " + choice(self.__fluids) + "."
+
+    def seek_choice(self):
+        for item in self.__crunchies:
+            for item in self.__fluids:
+                if item == "bier":
+                    return item
+            if item == "pizza":
+                return item

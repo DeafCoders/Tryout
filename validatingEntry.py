@@ -20,7 +20,7 @@ class ValidatingEntry(Entry):
             self.__variable.set(self.__value)
         elif new_value != value:
             self.__value = new_value
-            self.__variable.set(self.new_value)
+            self.__variable.set(new_value)
         else:
             self.__value = value
 
