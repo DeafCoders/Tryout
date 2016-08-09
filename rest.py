@@ -8,8 +8,10 @@ except ImportError:
 # response = urllib2.urlopen(url).read()
 
 url = 'http://www.acme.com/users/details'
-params = str(urllib.parse.urlencode({
+params = urllib.parse.urlencode({
   'firstName': 'John',
   'lastName': 'Doe'
-}))
-response = urllib2.urlopen(url, params).read()
+})
+binary_params = params.encode('encoding')
+
+response = urllib2.urlopen(url, binary_params).read()
