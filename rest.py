@@ -10,7 +10,7 @@ class Copernica:
 
     def __init__(self):
        params = {}
-       params['limit'] = 1  # limiet standaard 9999, geen beperking
+       params['limit'] = -2  # limiet standaard 1
        params['start'] = 0  # start altijd vanuit 0
        self.params = params
        self.details_url = {
@@ -19,7 +19,6 @@ class Copernica:
            'destinations': '/destinations/?',
            'snapshot': '/snapshot/?',
        }
-       self.temp = 0
 
     def curl_options(self, url):
         b = BytesIO()
@@ -45,12 +44,15 @@ class Copernica:
         self.params['access_token'] = token
         return self.curl_options("https://api.copernica.com/emailing/" + str(emailing_id) + self.details_url[details] + urllib.urlencode(self.params))
 
-    def get_mailings_mass(self, token, limit):
+    def get_mailings_mass(self, token, limit=1):
         count_id = self.get_mailings(token, limit)['data']
-
         for item in count_id:
             for item_details in self.details_url:
                 print(self.get_mailing_details(token, item['id'], item_details))
+
+    #todo: functie bouwen om alle waarden in database te invoeren aan hand van mailing ID (1: ID ontvangen en aanroepen met get_mailing_details , 2: waarden uit dict extraheren, 3: waarden in database invoeren
+
+    #todo: functie bouwen voor periodieke checks of er nieuwe mailings zijn verstuurd (1: timestanpsent van laatste mailing opzoeken via SQL, vanaf dat datum tot nu toe opzoeken, en vervolgens functie van TODO 1 aanroepen met nieuwe mailingIDs
 
 
 
@@ -61,4 +63,5 @@ class Copernica:
 #ophalen statistieken ahv token van een klant
 #print(Copernica().get_mailing_details("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313", "19", "snapshot"))
 
-print(Copernica().get_mailings_mass("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313", 10))
+#ophalen van tien mailings inclsief alle benodigde informatie (deliveries, maildocument info, abuses en statistiekeninfo)
+print(Copernica().get_mailings_mass("5fad6ce4eeca28c7fbd41f16073dc2e4f67f823b925d40ea3fc6bd8eb313b5723fdc7a0af0d65a01c52fefeaa35beec951e3ff4fe905d0a12a1342f5b070a313", 2))
