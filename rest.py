@@ -8,16 +8,14 @@ params = {}
 params['type'] = 123
 params['limit'] = 123
 params['start'] = 0
-params['access_token'] = 123
+params['access_token'] = "27009132287e614fa57f7b821c83ef27332c93ac2f5430c01b9b6471925458f8754b7a49f2c5f4fd5fc08cd5a74af155fdee4683977ad28c99668744c440e02a"
 
-params = json.dumps(urllib.urlencode(params))
-print(params)
 http_header = [
     'Content-Type: application/json'
 ]
 
-url = 'https://api.copernica.com/emailings/?%s' % params
-
+url = "https://api.copernica.com/emailings/?" + urllib.urlencode(params)
+print(url)
 b = BytesIO()
 c = pycurl.Curl()
 
@@ -28,5 +26,5 @@ c.setopt(pycurl.WRITEDATA, b)
 c.perform()
 output_values = json.loads(b.getvalue().decode())
 print(type(output_values))
-print(output_values["error"])
+print(output_values)
 
